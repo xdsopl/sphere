@@ -1,0 +1,8 @@
+sphere - tessellate a sphere through subdivision of triangles
+Written in 2005 by <Ahmet Inan> <xdsopl@googlemail.com>
+To the extent possible under law, the author(s) have dedicated all copyright and related and neighboring rights to this software to the public domain worldwide. This software is distributed without any warranty.
+You should have received a copy of the CC0 Public Domain Dedication along with this software. If not, see <http://creativecommons.org/publicdomain/zero/1.0/>.
+
+by recursively subdividing and normalizing the faces of a platonic solid by triangles, you can create a nice uniformal looking sphere without poles.
+implemented are the tetrahedron, octahedron and icosahedron as basis for such a sphere.
+
