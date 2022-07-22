@@ -297,7 +297,12 @@ void resize_gl(const int width, const int height)
 	glViewport(0, 0, width, height);
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
-	glFrustum(-1.0, 1.0, -((GLfloat)height / (GLfloat)width), (GLfloat)height / (GLfloat)width, 5.0, 60.0);
+	GLfloat wh = (GLfloat)width / (GLfloat)height;
+	GLfloat hw = (GLfloat)height / (GLfloat)width;
+	if (height < width)
+		glFrustum(-wh, wh, -1.0, 1.0, 5.0, 60.0);
+	else
+		glFrustum(-1.0, 1.0, -hw, hw, 5.0, 60.0);
 	glMatrixMode(GL_MODELVIEW);
 }
 
