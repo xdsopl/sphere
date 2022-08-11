@@ -400,8 +400,9 @@ void handle_events()
 				break;
 			case SDL_MOUSEMOTION:
 				if (mouse_rot) {
-					rotate(rot, -3.14159265 * event.motion.yrel / screen_h, 1.0, 0.0, 0.0);
-					rotate(rot, -3.14159265 * event.motion.xrel / screen_w, 0.0, 1.0, 0.0);
+					GLfloat factor = 3.14 / fmin(screen_h, screen_w);
+					rotate(rot, -factor * event.motion.yrel, 1, 0, 0);
+					rotate(rot, -factor * event.motion.xrel, 0, 1, 0);
 				}
 				break;
 			case SDL_VIDEORESIZE:
