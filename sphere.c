@@ -328,6 +328,13 @@ void rotate(GLfloat *m, const GLfloat a, const GLfloat x, const GLfloat y, const
 		m[i] = t[i];
 }
 
+void norm_rot(GLfloat *m)
+{
+	NORM(m[0], m[1], m[2]);
+	NORM(m[4], m[5], m[6]);
+	CROSS(m[8], m[9], m[10], m[0], m[1], m[2], m[4], m[5], m[6]);
+}
+
 void handle_events()
 {
 	SDL_Surface *screen;
@@ -402,6 +409,7 @@ void handle_events()
 					GLfloat factor = 3.14 / fmin(screen_h, screen_w);
 					rotate(rot, -factor * event.motion.yrel, 1, 0, 0);
 					rotate(rot, -factor * event.motion.xrel, 0, 1, 0);
+					norm_rot(rot);
 				}
 				break;
 			case SDL_VIDEORESIZE:
