@@ -34,6 +34,7 @@ GLfloat material_specular[4] = {0.2, 0.2, 0.2, 0.0};
 GLfloat material_shiny[1] = {50.0};
 
 #define NORM(X, Y, Z) do { double f = 1.0 / sqrt(X * X + Y * Y + Z * Z); X *= f; Y *= f; Z *= f; } while (0)
+#define CROSS(Tx, Ty, Tz, Ax, Ay, Az, Bx, By, Bz) do { Tx = (Ay) * (Bz) - (Az) * (By); Ty = (Az) * (Bx) - (Ax) * (Bz); Tz = (Ax) * (By) - (Ay) * (Bx); } while (0)
 
 void triangle(int n, double Ax, double Ay, double Az, double Bx, double By, double Bz, double Cx, double Cy, double Cz)
 {
@@ -82,9 +83,7 @@ void triangle(int n, double Ax, double Ay, double Az, double Bx, double By, doub
 		}
 	} else {
 		/* without normalizing it makes no sence to use non flat triangles */
-		Nx = (Ay - By) * (Bz - Cz) - (Az - Bz) * (By - Cy);
-		Ny = (Az - Bz) * (Bx - Cx) - (Ax - Bx) * (Bz - Cz);
-		Nz = (Ax - Bx) * (By - Cy) - (Ay - By) * (Bx - Cx);
+		CROSS(Nx, Ny, Nz, Ax - Bx, Ay - By, Az - Bz, Bx - Cx, By - Cy, Bz - Cz);
 		NORM(Nx, Ny, Nz);
 		glNormal3d(Nx, Ny, Nz);
 		glVertex3d(Ax, Ay, Az);
